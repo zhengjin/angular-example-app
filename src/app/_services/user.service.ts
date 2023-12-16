@@ -8,6 +8,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getProfile(): Observable<User> {
+    debugger
     return this.http.get<User>('/profile');
   }
 }

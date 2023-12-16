@@ -10,7 +10,14 @@ export interface UserState {
 }
 
 export const initialState: UserState = {
-  data: null,
+  data: {
+    id: 0,
+    email: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    phone: ''
+  },
   status: Statuses.UNINITIALIZED
 };
 
@@ -26,11 +33,26 @@ const user = createReducer(
   on(userActions.LoadingUser, (state) => {
     return {
       ...state,
-      data: null,
+      data: {
+        id: 0,
+        email: '',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        phone: ''
+      },
       status: Statuses.LOADING
     }
   }),
-  on(userActions.ResetUser, (state => ({...state, data: null, status: Statuses.UNINITIALIZED})))
+  on(userActions.ResetUser, (state => ({...state, 
+    data: {
+      id: 0,
+      email: '',
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      phone: ''
+  }, status: Statuses.UNINITIALIZED})))
 );
 
 export function userReducer(state: UserState | undefined, action: Action) {

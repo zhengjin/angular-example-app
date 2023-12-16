@@ -6,31 +6,29 @@ import * as authActions from "../actions/auth.actions";
 import {AuthService} from "../../_services/authentication.service";
 import {Router} from "@angular/router";
 import * as userActions from "../actions/user.actions";
-import {Store} from "@ngrx/store";
 
 @Injectable()
 export class AuthEffects {
 
+  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
+
   login$ = createEffect(() => this.actions$.pipe(
-    ofType(authActions.Login),
-    tap(() => this.store$.dispatch(userActions.LoadingUser())),
+    ofType(authActions.LoginAction),
     switchMap(action => this.authService.login(action.params).pipe(
       tap(tokens => {
         localStorage.setItem('accessToken', tokens.accessToken);
-        this.router.navigateByUrl('/core/my-day').then()
+        this.router.navigateByUrl('/home').then()
       }),
       map(() => userActions.GetProfile()),
-      catchError(error => throwError(error))
+      catchError(error => throwError(() => error))
     ))
   ));
 
   signUp$ = createEffect(() => this.actions$.pipe(
-    ofType(authActions.SignUp),
+    ofType(authActions.SignUpAction),
     mergeMap(action => this.authService.signUp(action.params).pipe(
-      tap(res => (!!res.id && this.router.navigateByUrl('/auth/login'))),
-      catchError(error => throwError(error))
+      tap(res => (!!res.id && this.router.navigateByUrl('/login'))),
+      catchError(error => throwError(() => error))
     ))
   ), { dispatch: false });
-
-  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
 }

@@ -1,7 +1,8 @@
 import {createAction, props} from "@ngrx/store";
-import * as fromAuthInterface from "../../_interfaces/auth.interface";
+import {Login, SignUp} from "../../_interfaces/auth.interface";
 
 const TYPE = '[Auth]';
 
-export const Login = createAction(`${TYPE} Login`, props<{params: fromAuthInterface.Login}>());
-export const SignUp = createAction(`${TYPE} SignUp`, props<{params: fromAuthInterface.SignUp}>());
+export const LoginAction = createAction(`${TYPE} Login`, props<{params: Login}>());
+export const LogoutAction = createAction(`${TYPE} Logout`);
+export const SignUpAction = createAction(`${TYPE} SignUp`, props<{params: SignUp}>());

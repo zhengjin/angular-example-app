@@ -1,7 +1,7 @@
 import {ActionReducerMap} from '@ngrx/store';
 import {userReducer, UserState} from './user.reducer';
 
-interface AppState {
+export interface AppState {
   user: UserState;
 }
 
