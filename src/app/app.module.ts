@@ -6,6 +6,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { BrowserModule } from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
+import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -20,6 +22,11 @@ import { UserEffects } from './_stores/effects/user.effects';
 import { UserService } from './_services/user.service';
 import { AuthService } from './_services/authentication.service';
 
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +36,21 @@ import { AuthService } from './_services/authentication.service';
     LoginComponent
   ],
   imports: [
+    PasswordModule,
+    InputTextModule,
+    CardModule,
+    ButtonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects, UserEffects]),
-    StoreDevtoolsModule.instrument({maxAge: 25}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: !environment.production,
+      autoPause: true
+    })
   ],
   providers: [
     AuthService,

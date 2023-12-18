@@ -3,10 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 import { AppState } from '../_stores/reducers';
 import {LoginAction} from "../_stores/actions/auth.actions";
-import {Login, SignUp, Tokens} from "../_interfaces/auth.interface";
 
 @Component({
   selector: 'app-login',
@@ -58,5 +56,4 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.store$.dispatch(LoginAction({params: this.loginForm.value}));
   }
-
 }
