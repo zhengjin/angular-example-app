@@ -1,0 +1,127 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #f8f8f8;
+  }
+  &::-webkit-scrollbar {
+		width: 7px;
+		height: 7px;
+  }
+  &::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		background-color: rgba(101, 94, 255, .4);
+		transition: background-color 0.3s;
+		opacity: 0.1;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin pct($pct) {
+  width: #{$pct};
+  position: relative;
+  margin: 0 auto;
+}
+
+@mixin triangle($width, $height, $color, $direction) {
+  $width: $width/2;
+  $color-border-style: $height solid $color;
+  $transparent-border-style: $width solid transparent;
+  height: 0;
+  width: 0;
+  @if $direction==up {
+    border-bottom: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+  @else if $direction==right {
+    border-left: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+  @else if $direction==down {
+    border-top: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+  @else if $direction==left {
+    border-right: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+}
+
+@mixin fcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin borderRadius($borderRadius){
+  border-radius:$borderRadius;
+  -o-border-radius:$borderRadius;
+  -ms-border-radius:$borderRadius;
+  -moz-border-radius:$borderRadius;
+  -webkit-border-radius:$borderRadius;
+}
+
+@mixin msfilter($msfilter){ 
+  /* filter: url(blur.svg#blur);  FireFox, Chrome, Opera */
+  
+  -webkit-filter: blur($msfilter); /* Chrome, Opera */
+     -moz-filter: blur($msfilter);
+      -ms-filter: blur($msfilter);    
+          filter: blur($msfilter);
+  
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=$msfilter, MakeShadow=false); /* IE6~IE9 */
+}
+
+@mixin boxShadow($boxShadow){
+  box-shadow:$boxShadow;
+  -o-box-shadow:$boxShadow;
+  -moz-box-shadow:$boxShadow;
+  -webkit-box-shadow:$boxShadow;
+  -ms-box-shadow:$boxShadow;
+}
+
+@mixin lineClamp($lineClamp){
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lineClamp;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+@mixin placeholder($placeholder){
+  &::-webkit-input-placeholder { /* WebKit browsers */
+    color: $placeholder;
+  }
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $placeholder;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $placeholder;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $placeholder;
+  }
+}
+
+@mixin rotate($rotate){
+  transform:$rotate;
+  -ms-transform:$rotate;     /* IE 9 */
+  -moz-transform:$rotate;    /* Firefox */
+  -webkit-transform:$rotate; /* Safari 和 Chrome */
+  -o-transform:$rotate;  /* Opera */
+}

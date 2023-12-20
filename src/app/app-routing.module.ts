@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'map', component: MapComponent },
   { path: '**', redirectTo: "home" }
 ];
 
